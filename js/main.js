@@ -1,15 +1,23 @@
 //trae la info de la API con fetch
 
 const url = "https://harry-potter-api.onrender.com/personajes";
-const HTMLResponse = document.querySelector("main");
+const HTMLBody = document.querySelector("body");
+
+// Crear un contenedor flex para las secciones
+const container = document.createElement("div");
+container.classList.add("characters-container");
+HTMLBody.appendChild(container);
 
 fetch(url)
   .then(response => response.json())
   .then(users => {
     users.forEach(user => {
+      
       const section = document.createElement("section");
-
+      const imagen = document.createElement("img");
       const magoElement = document.createElement("p");
+       imagen.src = "images/" + `${user.personaje}` + ".png";
+       section.appendChild(imagen);
       magoElement.textContent = `Nombre Mago: ${user.personaje}`;
       section.appendChild(magoElement);
 
@@ -17,9 +25,35 @@ fetch(url)
       magelElement.textContent = `Nombre Magel: ${user.interpretado_por}`;
       section.appendChild(magelElement);
 
-      HTMLResponse.appendChild(section);
-     });
+      container.appendChild(section);
+    });
   });
+
+
+
+
+  
+// const url = "https://harry-potter-api.onrender.com/personajes";
+// const HTMLResponse = document.querySelector("main");
+
+// fetch(url)
+//   .then(response => response.json())
+//   .then(users => {
+//     users.forEach(user => {
+//       const section = document.createElement("section");
+
+//       const magoElement = document.createElement("p");
+//       magoElement.textContent = `Nombre Mago: ${user.personaje}`;
+//       section.appendChild(magoElement);
+
+//       const magelElement = document.createElement("p");
+//       magelElement.textContent = `Nombre Magel: ${user.interpretado_por}`;
+//       section.appendChild(magelElement);
+
+//       HTMLResponse.appendChild(section);
+//      });
+//   });
+
   	 
 
 
@@ -76,5 +110,6 @@ fetch(url)
 // xhr.addEventListener("load", onRequestHandler);
 // xhr.open("GET", `${url}`);
 // xhr.send();
+
 
 
